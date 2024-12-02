@@ -26,7 +26,6 @@ public class QueryRidesBean {
 	private String selectedDepartCity;
 	private String selectedArrivalCity;
 
-
 	private BLFacade businessLogic;
 
 	public QueryRidesBean() {
@@ -106,14 +105,14 @@ public class QueryRidesBean {
 		if (selectedDepartCity != null && selectedArrivalCity != null && data != null) {
 			filteredRides = businessLogic.getRides(selectedDepartCity, selectedArrivalCity, data);
 			if (filteredRides == null || filteredRides.isEmpty()) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "No rides found for the selected criteria.", ""));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"Ez dago hautatutako irizpideekin bat datozen bidaiarik", ""));
 			}
 		} else {
 			filteredRides = null;
 		}
 	}
-	
+
 	public void sartuArrivalCities() {
 		System.out.println(this.selectedArrivalCity + "listener");
 	}

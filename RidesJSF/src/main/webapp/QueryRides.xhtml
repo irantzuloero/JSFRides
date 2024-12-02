@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -9,64 +9,165 @@
 <f:view>
 	<h:head>
 		<title>Query rides</title>
+		<h:outputStylesheet library="css" name="styles.css" />
+		<style>
+body {
+	background-color: lightblue;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+/* Estilo para el recuadro blanco */
+.form-container {
+	background-color: white;
+	padding: 20px; /* Reducido el padding del contenedor */
+	border-radius: 10px;
+	width: 50%;
+	margin: 30px auto;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+/* Centrar el contenido de la tabla */
+table {
+	width: 100%;
+	margin: 0 auto;
+}
+
+/* Estilo para los textos más grandes y en negrita */
+.bold-text {
+	font-weight: bold;
+	font-size: 20px; /* Un poco más grande */
+	text-align: left;
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+
+/* Alineación de las celdas */
+td {
+	padding: 5px 10px; /* Reducido el padding para menos espacio */
+	vertical-align: middle;
+	/* Asegura que los campos estén alineados al centro verticalmente */
+}
+
+/* Alinear texto a la izquierda o derecha según la columna */
+.left-align {
+	text-align: left;
+}
+
+.right-align {
+	text-align: right;
+}
+
+/* Reducir margen entre la etiqueta y el campo de entrada */
+.input-row td {
+	margin-bottom: 5px;
+	/* Reducido el margen entre la etiqueta y el campo */
+}
+
+.input-row select, .input-row input, .input-row p\:calendar {
+	margin-top: 5px;
+	/* Reducir el espacio superior entre la etiqueta y el campo */
+}
+
+/* Ajustar el ancho de la celda de la etiqueta */
+.label-cell {
+	width: 25%; /* Establecer un ancho fijo más pequeño */
+	text-align: left; /* Alinear a la izquierda */
+}
+
+.input-cell {
+	width: 70%;
+	/* Reducir el ancho de los campos a 70% para hacer espacio a la derecha */
+	text-align: left; /* Alinear a la izquierda */
+}
+
+/* Ajustar el botón Bilatu */
+.button-cell {
+	text-align: center;
+	margin-top: 10px; /* Separación para el botón */
+}
+</style>
 	</h:head>
+
 	<h:body>
-		<h:form>
-			<h3>Mesedez, sartu izena eta pasahitza</h3>
-			<table>
-				<tr>
-					<td>Depart City</td>
-					<td><p:selectOneMenu id="departCity"
-							value="#{QueryRides.selectedDepartCity}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItems value="#{QueryRides.departCities}" var="city"
-								itemValue="#{city}" itemLabel="#{city}" />
-							<p:ajax event="change"
-								listener="#{QueryRides.updateArrivalCities}"
-								update="arrivalCity rideTable" />
-						</p:selectOneMenu></td>
-				</tr>
-				<tr>
-					<td>Arrival City</td>
-					<td><p:selectOneMenu id="arrivalCity"
-							value="#{QueryRides.selectedArrivalCity}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItems value="#{QueryRides.arrivalCities}" var="arrival"
-								itemValue="#{arrival}" itemLabel="#{arrival}" />
-							<p:ajax event="change"
-								listener="#{QueryRides.sartuArrivalCities}" />
-						</p:selectOneMenu></td>
-				</tr>
-				<tr>
-					<td>Data:</td>
-					<td><p:calendar id="data" value="#{QueryRides.data}"
-							navigator="true" mode="popup">
-							<p:ajax event="dateSelect" listener="#{QueryRides.onDateSelect}"
-								update="mezuak"></p:ajax>
-						</p:calendar></td>
-				</tr>
-				<tr>
-					<td><p:commandButton value="Aukeratu" action="#{QueryRides.updateRides}" update="rideTable" /></td>
-				</tr>
-				<tr>
-					<td>Viajes:</td>
-					<td><h:messages id="mezuak" style="color:blue" /> <p:dataTable
-							id="rideTable" var="ride" value="#{QueryRides.filteredRides}"
-							style="margin-top:20px;"
-							emptyMessage="No rides available for the selected criteria.">
-							<p:column headerText="Driver">
-								<h:outputText value="#{ride.driver.name}" />
-							</p:column>
-							<p:column headerText="Seats">
-								<h:outputText value="#{ride.nPlaces}" />
-							</p:column>
-							<p:column headerText="Price">
-								<h:outputText value="#{ride.price}" />
-							</p:column>
-						</p:dataTable></td>
-				</tr>
-			</table>
-		</h:form>
+		<div class="form-container">
+			<h:form>
+				<h1>Bidaia bilatu</h1>
+				<table>
+					<tr class="input-row">
+						<td class="label-cell">Irteera hiria:</td>
+						<td class="input-cell"><p:selectOneMenu id="departCity"
+								value="#{QueryRides.selectedDepartCity}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItems value="#{QueryRides.departCities}" var="city"
+									itemValue="#{city}" itemLabel="#{city}" />
+								<p:ajax event="change"
+									listener="#{QueryRides.updateArrivalCities}"
+									update="arrivalCity rideTable" />
+							</p:selectOneMenu></td>
+					</tr>
+					<tr class="input-row">
+						<td class="label-cell">Helmuga hiria:</td>
+						<td class="input-cell"><p:selectOneMenu id="arrivalCity"
+								value="#{QueryRides.selectedArrivalCity}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItems value="#{QueryRides.arrivalCities}" var="arrival"
+									itemValue="#{arrival}" itemLabel="#{arrival}" />
+								<p:ajax event="change"
+									listener="#{QueryRides.sartuArrivalCities}" />
+							</p:selectOneMenu></td>
+					</tr>
+					<tr class="input-row">
+						<td class="label-cell">Data:</td>
+						<td class="input-cell"><p:calendar id="data"
+								value="#{QueryRides.data}" navigator="true" mode="popup">
+								<p:ajax event="dateSelect" listener="#{QueryRides.onDateSelect}"
+									update="mezuak" />
+							</p:calendar></td>
+					</tr>
+					<!-- Botón Bilatu justo debajo del campo Data -->
+					<tr>
+						<td colspan="2" class="button-cell"><p:commandButton
+								value="Bilatu" action="#{QueryRides.updateRides}"
+								update="rideTable" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="bold-text">Eskuragarri dauden bidaiak:</td>
+					</tr>
+					<tr>
+						<td colspan="2"><h:messages id="mezuak" style="color:blue" />
+							<p:dataTable id="rideTable" var="ride"
+								value="#{QueryRides.filteredRides}" style="margin-top:20px;"
+								emptyMessage="Ez dago hautatutako irizpideekin bat datozen bidaiarik.">
+								<p:column headerText="Gidaria">
+									<h:outputText value="#{ride.driver.name}" />
+								</p:column>
+								<p:column headerText="Eserleku libreak">
+									<h:outputText value="#{ride.nPlaces}" />
+								</p:column>
+								<p:column headerText="Prezioa">
+									<h:outputText value="#{ride.price}" />
+								</p:column>
+							</p:dataTable></td>
+					</tr>
+				</table>
+
+				<!-- Botón Itxi centrado -->
+				<table style="margin: 15px auto;">
+					<tr>
+						<td><p:commandButton value="Itxi" immediate="true"
+								action="#{createRideBean.close}" ajax="false"
+								style="font-size: 13px;" /></td>
+					</tr>
+				</table>
+			</h:form>
+		</div>
 	</h:body>
 </f:view>
+
 </html>
