@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,10 +9,9 @@
 <f:view>
 	<h:head>
 		<title>Query rides</title>
-		<h:outputStylesheet library="css" name="styles.css" />
+		<h:outputStylesheet  name="css/styles.css" />
 		<style>
 body {
-	background-color: lightblue;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -91,6 +90,9 @@ td {
 	text-align: center;
 	margin-top: 10px; /* Separación para el botón */
 }
+.error-message {
+	color: red;
+}
 </style>
 	</h:head>
 
@@ -102,39 +104,38 @@ td {
 					<tr class="input-row">
 						<td class="label-cell">Irteera hiria:</td>
 						<td class="input-cell"><p:selectOneMenu id="departCity"
-								value="#{QueryRides.selectedDepartCity}"
-								converter="omnifaces.SelectItemsConverter">
+								value="#{QueryRides.selectedDepartCity}" required="true">
 								<f:selectItems value="#{QueryRides.departCities}" var="city"
 									itemValue="#{city}" itemLabel="#{city}" />
 								<p:ajax event="change"
-									listener="#{QueryRides.updateArrivalCities}"
+									listener="#{QueryRides.updateArrivalCities}" 
 									update="arrivalCity rideTable" />
 							</p:selectOneMenu></td>
+						<td><h:message for="departCity" class="error-message" /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Helmuga hiria:</td>
 						<td class="input-cell"><p:selectOneMenu id="arrivalCity"
-								value="#{QueryRides.selectedArrivalCity}"
-								converter="omnifaces.SelectItemsConverter">
+								value="#{QueryRides.selectedArrivalCity}" required="true">
 								<f:selectItems value="#{QueryRides.arrivalCities}" var="arrival"
 									itemValue="#{arrival}" itemLabel="#{arrival}" />
-								<p:ajax event="change"
-									listener="#{QueryRides.sartuArrivalCities}" />
 							</p:selectOneMenu></td>
+						<td><h:message for="arrivalCity" class="error-message" /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Data:</td>
 						<td class="input-cell"><p:calendar id="data"
-								value="#{QueryRides.data}" navigator="true" mode="popup">
+								value="#{QueryRides.data}" navigator="true"
+								dateFormat="dd/MM/yyyy" required="true" showIcon="true" mode="popup">
 								<p:ajax event="dateSelect" listener="#{QueryRides.onDateSelect}"
 									update="mezuak" />
 							</p:calendar></td>
+							<td><h:message for="data" class="error-message" /> </td>
 					</tr>
-					<!-- Botón Bilatu justo debajo del campo Data -->
 					<tr>
 						<td colspan="2" class="button-cell"><p:commandButton
 								value="Bilatu" action="#{QueryRides.updateRides}"
-								update="rideTable" /></td>
+								process="@form" update="@form"/></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="bold-text">Eskuragarri dauden bidaiak:</td>
@@ -157,7 +158,6 @@ td {
 					</tr>
 				</table>
 
-				<!-- Botón Itxi centrado -->
 				<table style="margin: 15px auto;">
 					<tr>
 						<td><p:commandButton value="Itxi" immediate="true"

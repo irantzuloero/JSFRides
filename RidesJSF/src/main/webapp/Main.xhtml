@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,24 +10,76 @@
 <f:view>
 	<h:head>
 		<title>Main</title>
-		<h:outputStylesheet library="css" name="styles.css" />
+		<h:outputStylesheet name="css/styles.css" />
+		<style>
+		/* Estilo general para el body */
+body {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para el formulario */
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+/* Estilos de los botones */
+button {
+    margin: 5px; /* Espacio reducido entre los botones */
+}
+
+/* Tabla para los botones */
+table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Mensajes de error y globales */
+.error-message {
+    color: red;
+}
+
+.global-message {
+    color: blue;
+    text-align: center;
+}
+
+		</style>
 	</h:head>
 
-	<h:body
-		style="background-color: lightblue; display: flex; align-items: center; justify-content: center;">
-		<div
-			style="background-color: white; padding: 30 px; border-radius: 10px; width: 50%; margin: 30px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+	<h:body>
+		<div class="form-container">
 			<h:form>
-				<h1>Select option</h1>
-				<table style="margin: 0 auto;">
+				<h1>Zer egin nahi duzu?</h1>
+				<table>
 					<tr>
-						<td><p:commandButton value="Bidaia bilatu"
-								action="#{Main.goToQueryRides}" ajax="false" /></td>
+						<td colspan="2">
+							<p:commandButton value="Bidaia bilatu"
+								action="#{Main.goToQueryRides}" ajax="false" />
+						</td>
 					</tr>
 					<tr>
-						<td><p:commandButton value="Bidaia sortu"
-								action="#{Main.goToCreateRide}" style="margin-bottom: 40px;"
-								ajax="false" /></td>
+						<td colspan="2">
+							<p:commandButton value="Bidaia sortu"
+								action="#{Main.goToCreateRide}" ajax="false" />
+						</td>
 					</tr>
 				</table>
 			</h:form>

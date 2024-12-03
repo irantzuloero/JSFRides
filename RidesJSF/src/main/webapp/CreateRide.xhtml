@@ -5,70 +5,118 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+
 <f:view>
 	<h:head>
 		<title>Create Ride</title>
-		<h:outputStylesheet library="css" name="styles.css" />
+		<h:outputStylesheet  name="css/styles.css" />
+		<style>
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+.form-container {
+	background-color: white;
+	padding: 25px;
+	border-radius: 10px;
+	width: 50%;
+	margin: 30px auto;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+	width: 100%;
+}
+
+td {
+	padding: 10px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.error-message {
+	color: red;
+}
+
+.global-message {
+	color: blue;
+	text-align: center;
+}
+
+.button-table {
+	margin-top: 15px;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+		</style>
 	</h:head>
 
-	<h:body
-		style="background-color: lightblue; display: flex; align-items: center; justify-content: center;">
-		<div
-			style="background-color: white; padding: 25px; border-radius: 10px; width: 50%; margin: 30px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+	<h:body>
+		<div class="form-container">
+		
 			<h:form>
 				<h1>Bidaia sortu</h1>
-				<table style="margin: 0 auto;">
+				<table>
 					<tr>
-						<td style="text-align: left;">Irteera hiria:</td>
+						<td>Irteera hiria:</td>
 						<td><p:inputText id="departCity"
 								value="#{createRideBean.departCity}" required="true" /></td>
-						<td><h:message for="departCity" style="color:red" /></td>
+						<td><h:message for="departCity" class="error-message" /></td>
 					</tr>
 					<tr>
-						<td style="text-align: left;">Helmuga hiria:</td>
+						<td>Helmuga hiria:</td>
 						<td><p:inputText id="arrivalCity"
 								value="#{createRideBean.arrivalCity}" required="true" /></td>
-						<td><h:message for="arrivalCity" style="color:red" /></td>
+						<td><h:message for="arrivalCity" class="error-message" /></td>
 					</tr>
 					<tr>
-						<td style="text-align: left;">Eserleku kopurua:</td>
+						<td>Eserleku kopurua:</td>
 						<td><p:inputText id="numSeats"
 								value="#{createRideBean.numSeats}" required="true">
 								<f:validateLongRange minimum="1" />
 							</p:inputText></td>
-						<td><h:message for="numSeats" style="color:red" /></td>
+						<td><h:message for="numSeats" class="error-message" /></td>
 					</tr>
 					<tr>
-						<td style="text-align: left;">Prezioa:</td>
+						<td>Prezioa:</td>
 						<td><p:inputText id="price" value="#{createRideBean.price}"
 								required="true">
 								<f:validateDoubleRange minimum="1.0" />
 							</p:inputText></td>
-						<td><h:message for="price" style="color:red" /></td>
+						<td><h:message for="price" class="error-message" /></td>
 					</tr>
 					<tr>
-						<td style="text-align: left;">Data:</td>
+						<td>Data:</td>
 						<td><p:calendar id="rideDate"
 								value="#{createRideBean.rideDate}" navigator="true"
 								dateFormat="dd/MM/yyyy" required="true" showIcon="true" /></td>
-						<td><h:message for="rideDate" style="color:red" /></td>
+						<td><h:message for="rideDate" class="error-message" /> </td>
 					</tr>
 				</table>
-				<table style="margin: 15px auto;">
+
+				<table class="button-table">
 					<tr>
-						<td><p:commandButton value="Bidaia sortu"
-								action="#{createRideBean.createRide}"
-								style="margin-bottom: 20px;" /></td>
+						<td><p:commandButton value="Bidaia sortu" action="#{createRideBean.createRide}" process="@form" update="@form" /></td>
+						
 					</tr>
 					<tr>
 						<td><p:commandButton value="Itxi" immediate="true"
-								action="#{createRideBean.close}" ajax="false"
-								style="font-size: 13px;" /></td>
+								action="#{createRideBean.close}" ajax="false" /></td>
 					</tr>
 				</table>
-				<h:messages globalOnly="true" style="color:blue" />
 			</h:form>
 		</div>
 	</h:body>
 </f:view>
+
 </html>
