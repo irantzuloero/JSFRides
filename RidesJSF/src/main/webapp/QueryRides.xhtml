@@ -10,90 +10,6 @@
 	<h:head>
 		<title>Query rides</title>
 		<h:outputStylesheet  name="css/styles.css" />
-		<style>
-body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-}
-
-/* Estilo para el recuadro blanco */
-.form-container {
-	background-color: white;
-	padding: 20px; /* Reducido el padding del contenedor */
-	border-radius: 10px;
-	width: 50%;
-	margin: 30px auto;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
-}
-
-/* Centrar el contenido de la tabla */
-table {
-	width: 100%;
-	margin: 0 auto;
-}
-
-/* Estilo para los textos más grandes y en negrita */
-.bold-text {
-	font-weight: bold;
-	font-size: 20px; /* Un poco más grande */
-	text-align: left;
-	margin-bottom: 5px;
-	margin-top: 15px;
-}
-
-/* Alineación de las celdas */
-td {
-	padding: 5px 10px; /* Reducido el padding para menos espacio */
-	vertical-align: middle;
-	/* Asegura que los campos estén alineados al centro verticalmente */
-}
-
-/* Alinear texto a la izquierda o derecha según la columna */
-.left-align {
-	text-align: left;
-}
-
-.right-align {
-	text-align: right;
-}
-
-/* Reducir margen entre la etiqueta y el campo de entrada */
-.input-row td {
-	margin-bottom: 5px;
-	/* Reducido el margen entre la etiqueta y el campo */
-}
-
-.input-row select, .input-row input, .input-row p\:calendar {
-	margin-top: 5px;
-	/* Reducir el espacio superior entre la etiqueta y el campo */
-}
-
-/* Ajustar el ancho de la celda de la etiqueta */
-.label-cell {
-	width: 25%; /* Establecer un ancho fijo más pequeño */
-	text-align: left; /* Alinear a la izquierda */
-}
-
-.input-cell {
-	width: 70%;
-	/* Reducir el ancho de los campos a 70% para hacer espacio a la derecha */
-	text-align: left; /* Alinear a la izquierda */
-}
-
-/* Ajustar el botón Bilatu */
-.button-cell {
-	text-align: center;
-	margin-top: 10px; /* Separación para el botón */
-}
-.error-message {
-	color: red;
-}
-</style>
 	</h:head>
 
 	<h:body>
@@ -111,7 +27,7 @@ td {
 									listener="#{QueryRides.updateArrivalCities}" 
 									update="arrivalCity rideTable" />
 							</p:selectOneMenu></td>
-						<td><h:message for="departCity" class="error-message" /></td>
+						<td><h:message for="departCity" class="error-message"  /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Helmuga hiria:</td>
@@ -120,7 +36,7 @@ td {
 								<f:selectItems value="#{QueryRides.arrivalCities}" var="arrival"
 									itemValue="#{arrival}" itemLabel="#{arrival}" />
 							</p:selectOneMenu></td>
-						<td><h:message for="arrivalCity" class="error-message" /></td>
+						<td><h:message for="arrivalCity" class="error-message"  /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Data:</td>

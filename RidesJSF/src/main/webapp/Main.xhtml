@@ -11,57 +11,6 @@
 	<h:head>
 		<title>Main</title>
 		<h:outputStylesheet name="css/styles.css" />
-		<style>
-		/* Estilo general para el body */
-body {
-    background-color: lightblue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
-/* Estilo para el formulario */
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 50%;
-    margin: 30px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-
-/* Estilos de los botones */
-button {
-    margin: 5px; /* Espacio reducido entre los botones */
-}
-
-/* Tabla para los botones */
-table {
-    margin: 0 auto;
-    width: 100%;
-}
-
-td {
-    padding: 10px;
-    text-align: center;
-}
-
-/* Mensajes de error y globales */
-.error-message {
-    color: red;
-}
-
-.global-message {
-    color: blue;
-    text-align: center;
-}
-
-		</style>
 	</h:head>
 
 	<h:body>
@@ -70,14 +19,14 @@ td {
 				<h1>Zer egin nahi duzu?</h1>
 				<table>
 					<tr>
-						<td colspan="2">
-							<p:commandButton value="Bidaia bilatu"
+						<td colspan="2" style="padding: 10px; text-align: center;">
+							<p:commandButton value="Bidaia bilatu" style="margin: 5px;"
 								action="#{Main.goToQueryRides}" ajax="false" />
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p:commandButton value="Bidaia sortu"
+							<p:commandButton value="Bidaia sortu" style="margin: 5px; padding: 10px; text-align: center;"
 								action="#{Main.goToCreateRide}" ajax="false" />
 						</td>
 					</tr>

@@ -1,0 +1,75 @@
+body {
+	background-color: lightblue;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+.form-container {
+	background-color: white;
+	padding: 25px;
+	border-radius: 10px;
+	width: 50%;
+	margin: 30px auto;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+	width: 100%;
+}
+
+td {
+	padding: 10px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.error-message {
+	color: red;
+}
+
+.global-message {
+	color: blue;
+	text-align: center;
+}
+
+.button-table {
+	margin-top: 15px;
+	width: 100%; 
+	display: flex;
+	justify-content: center; 
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+.bold-text {
+	font-weight: bold;
+	font-size: 20px; /* Un poco más grande */
+	text-align: left;
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+/* Ajustar el botón Bilatu */
+.button-cell {
+	text-align: center;
+	margin-top: 10px; /* Separación para el botón */
+}
+
+.input-cell {
+	width: 70%;
+	/* Reducir el ancho de los campos a 70% para hacer espacio a la derecha */
+	text-align: left; /* Alinear a la izquierda */
+}
+
+/* Ajustar el ancho de la celda de la etiqueta */
+.label-cell {
+	width: 25%; /* Establecer un ancho fijo más pequeño */
+	text-align: left; /* Alinear a la izquierda */
+}

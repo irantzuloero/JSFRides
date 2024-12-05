@@ -1,5 +1,6 @@
 package rides.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -113,7 +114,9 @@ public class QueryRidesBean {
 		}
 	}
 
+
 	public void sartuArrivalCities() {
 		System.out.println(this.selectedArrivalCity + "listener");
 	}
+	
 }
