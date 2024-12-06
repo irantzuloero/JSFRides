@@ -91,7 +91,7 @@ public class CreateRideBean implements Serializable {
 	}
 
 	public String close() {
-		return "Main";
+		return "Main?faces-redirect=true";
 	}
 
 }

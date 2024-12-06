@@ -62,10 +62,14 @@
 						<td style="text-align: center;"><p:commandButton value="Bidaia sortu" action="#{createRideBean.createRide}" process="@form" update="@form" /></td>
 						
 					</tr>
-					<tr><h:messages id="messages" styleClass="error-message" /></tr>
+					<tr><h:messages id="messages" class="global-message" /></tr>
+				</table>
+				
+				<table style="margin: 15px auto;">
 					<tr>
-						<td style="font-size: 13px;"><p:commandButton value="Itxi" immediate="true"
-								action="#{createRideBean.close}" ajax="false" /></td>
+						<td><p:commandButton value="Itxi" immediate="true"
+								action="#{createRideBean.close}" ajax="false"
+								style="font-size: 13px;" /></td>
 					</tr>
 				</table>
 				
