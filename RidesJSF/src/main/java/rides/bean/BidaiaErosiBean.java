@@ -19,7 +19,7 @@ import domain.Ride;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
-public class QueryRidesBean {
+public class BidaiaErosiBean {
 	private List<String> departCities;
 	private List<String> arrivalCities;
 	private Date data;
@@ -29,7 +29,7 @@ public class QueryRidesBean {
 
 	private BLFacade businessLogic;
 
-	public QueryRidesBean() {
+	public BidaiaErosiBean() {
 		businessLogic = FacadeBean.getBusinessLogic();
 		this.departCities = new ArrayList<>();
 		this.arrivalCities = new ArrayList<>();
@@ -120,7 +120,7 @@ public class QueryRidesBean {
 	}
 	
 	public String close() {
-		return "Hasiera?faces-redirect=true";
+		return "Main?faces-redirect=true";
 	}
 	
 }

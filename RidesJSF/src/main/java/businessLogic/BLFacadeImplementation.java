@@ -3,6 +3,7 @@ package businessLogic;
 import domain.Ride;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
+import exceptions.UserAlreadyExistsException;
 import exceptions.RideAlreadyExistException;
 
 import java.util.Date;
@@ -12,7 +13,6 @@ import dataAccess.HibernateDataAccess;
 public class BLFacadeImplementation implements BLFacade {
     private HibernateDataAccess dataAccess;
 
-    // Constructor now accepts HibernateDataAccess as a parameter
     public BLFacadeImplementation(HibernateDataAccess dataAccess) {
         this.dataAccess = dataAccess;
     }
@@ -36,4 +36,15 @@ public class BLFacadeImplementation implements BLFacade {
     public List<Ride> getRides(String from, String to, Date date) {
         return dataAccess.getRides(from, to, date);
     }
+
+    public void registerUser(String name, String email, String password) throws UserAlreadyExistsException {
+        if (dataAccess.userExists(email)) {
+            throw new UserAlreadyExistsException("El usuario con este correo electrónico ya existe.");
+        }
+        dataAccess.createUser(name, email, password);  // Solo creamos el User
+    }
+    public boolean isValidUser(String email, String pasahitza) {
+        return dataAccess.isValidUser(email, pasahitza);
+    }
+
 }

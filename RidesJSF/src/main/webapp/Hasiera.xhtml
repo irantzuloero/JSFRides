@@ -9,7 +9,7 @@
 
 <f:view>
 	<h:head>
-		<title>Main</title>
+		<title>Hasiera</title>
 		<h:outputStylesheet name="css/styles.css" />
 	</h:head>
 
@@ -20,19 +20,20 @@
 				<table>
 					<tr>
 						<td colspan="2" style="padding: 10px; text-align: center; margin: 5px;">
-							<p:commandButton value="Bidaia bilatu"
-								action="#{Main.goToBidaiaErosi}" ajax="false" />
+							<p:commandButton value="Login"
+								action="#{hasieraBean.goToLogin}" ajax="false" />
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" style="padding: 10px; text-align: center; margin: 5px;">
-							<p:commandButton value="Bidaia sortu"
-								action="#{Main.goToCreateRide}" ajax="false" />
+							<p:commandButton value="Erregistratu"
+								action="#{hasieraBean.goToRegister}" ajax="false" />
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="padding-top: 30px; padding-bottom: 10px; text-align: center; margin: 5px;">
-							<p:commandButton value="Saioa itxi" action="#{Hasiera.saioaItxi}" ajax="false" style="font-size:14px"/>
+						<td colspan="2" style="padding: 10px; text-align: center; margin: 5px;">
+							<p:commandButton value="Bidaia bilatu"
+								action="#{Hasiera.goToQueryRides}" ajax="false" />
 						</td>
 					</tr>
 				</table>

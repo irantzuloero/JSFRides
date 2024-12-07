@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title>Erregistratu</title>
+		<h:outputStylesheet name="css/styles.css" />
+	</h:head>
+
+	<h:body>
+		<div class="form-container">
+
+			<h:form>
+
+				<h1>Sortu kontua</h1>
+				<table>
+					<tr>
+						<td>Izena:</td>
+						<td><p:inputText id="izena"
+								value="#{registerBean.izena}" required="true" /></td>
+						<td><h:message for="izena" class="error-message" /></td>
+					</tr>
+					<tr>
+						<td>Posta elektronikoa:</td>
+						<td><p:inputText id="email"
+								value="#{registerBean.email}" required="true" /></td>
+						<td><h:message for="email" class="error-message" /></td>
+					</tr>
+					<tr>
+						<td>Pasahitza:</td>
+						<td><p:password id="pass" redisplay="true"
+								value="#{registerBean.pasahitza}" required="true">
+								<f:validateLongRange minimum="1" maximum="500" />
+							</p:password></td>
+						<td><h:message for="pass" class="error-message" /></td>
+					</tr>
+					<tr>
+						<td>Pasahitza errepikatu:</td>
+						<td><p:password id="pass2" redisplay="true"
+								value="#{registerBean.pasahitza2}" required="true">
+								<f:validateLongRange minimum="1" maximum="500" />
+							</p:password></td>
+						<td><h:message for="pass2" class="error-message" /></td>
+					</tr>
+				</table>
+
+				<table class="button-table">
+					<tr>
+						<td style="text-align: center;">
+							<p:commandButton value="Sortu" action="#{registerBean.sortu}"
+								process="@form" update="@form" />
+						</td>
+					</tr>
+					<tr>
+						<h:messages id="messages" class="global-message" />
+					</tr>
+				</table>
+			
+				<table style="margin: 15px auto;">
+					<tr>
+						<td><p:commandButton value="Atzera" immediate="true"
+								action="#{loginBean.close}" ajax="false"
+								style="font-size: 13px;" /></td>
+					</tr>
+				</table>
+			</h:form>
+		</div>
+	</h:body>
+</f:view>
+
+</html>

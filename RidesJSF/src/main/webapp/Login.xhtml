@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+    <h:head>
+        <title>Login</title>
+        <h:outputStylesheet name="css/styles.css" />
+    </h:head>
+
+    <h:body>
+        <div class="form-container">
+
+            <h:form>
+                <h1>Saioa hasi</h1>
+                <table>
+                    <tr>
+                        <td>Erabiltzailea:</td>
+                        <td><p:inputText id="email" value="#{loginBean.email}" required="true" />
+                            <h:message for="email" class="error-message" /></td>
+                    </tr>
+                    <tr>
+						<td>Pasahitza:</td>
+						<td><p:password id="pass" redisplay="true"
+								value="#{loginBean.pasahitza}" required="true">
+								<f:validateLongRange minimum="1" maximum="500" />
+							</p:password></td>
+						<td><h:message for="pass" class="error-message" /></td>
+					</tr>
+                </table>
+
+                <div class="button-table" style="text-align: center; margin-top: 20px;">
+                    <p:commandButton value="Sartu" action="#{loginBean.sartu}" process="@form" update="@form" />
+                </div>
+
+                <h:messages id="messages" class="global-message" />
+
+               <table style="margin: 15px auto;">
+					<tr>
+						<td><p:commandButton value="Atzera" immediate="true"
+								action="#{loginBean.close}" ajax="false"
+								style="font-size: 13px;" /></td>
+					</tr>
+				</table>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+
+</html>

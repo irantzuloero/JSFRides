@@ -7,6 +7,7 @@ import java.util.List;
 import domain.Ride;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
+import exceptions.UserAlreadyExistsException;
 import exceptions.RideAlreadyExistException;
 
  
@@ -58,5 +59,6 @@ public interface BLFacade  {
 	 */
 	 public List<Ride> getRides(String from, String to, Date date);
 
-	
+	 public void registerUser(String name, String email, String password) throws UserAlreadyExistsException;
+	 public boolean isValidUser(String email, String pasahitza);
 }

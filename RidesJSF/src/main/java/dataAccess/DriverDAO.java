@@ -1,7 +1,6 @@
 package dataAccess;
 
 import org.hibernate.Session;
-
 import domain.Driver;
 
 public class DriverDAO {
