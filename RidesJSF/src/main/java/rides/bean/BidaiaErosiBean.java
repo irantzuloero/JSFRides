@@ -53,7 +53,6 @@ public class BidaiaErosiBean {
 	public void setSelectedDepartCity(String selectedDepartCity) {
 		System.out.println(selectedDepartCity + "set select metodoan");
 		this.selectedDepartCity = selectedDepartCity;
-		// Update arrival cities when the departure city changes
 		updateArrivalCities();
 	}
 

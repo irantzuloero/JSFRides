@@ -41,11 +41,10 @@ public class HibernateDataAccess {
     public void initializeDB() {
     	Transaction transaction = session.beginTransaction();
         try {
-            // Crear dos usuarios
+
             User user1 = new User("Aitor Fernandez", "aitor@gmail.com", "123");
             User user2 = new User("Ane Gaztañaga", "ane@gmail.com", "456");
 
-            // Guardar los usuarios en la base de datos
             userDAO.save(user1);
             userDAO.save(user2);
 
@@ -67,18 +66,18 @@ public class HibernateDataAccess {
 
     public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail) 
             throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
-
         if (new Date().compareTo(date) > 0) {
-            throw new RideMustBeLaterThanTodayException("The ride date must be later than today.");
+            throw new RideMustBeLaterThanTodayException("Data ezin da gaurko data baino zaharragoa izan.");
         }
 
         Driver driver = driverDAO.getDriver(driverEmail);
         if (driver == null) {
-            throw new RuntimeException("Driver not found.");
+        	System.out.println("sartu da");
+            throw new RuntimeException("Gidaria ez da aurkitu.");
         }
 
         if (rideDAO.rideExists(driver, from, to, date)) {
-            throw new RideAlreadyExistException("The ride already exists.");
+            throw new RideAlreadyExistException("Bidai hori sortuta dago.");
         }
 
         Ride ride = new Ride(from, to, date, nPlaces, price, driver);
@@ -98,32 +97,27 @@ public class HibernateDataAccess {
         return userDAO.getUserByEmail(email) != null;
     }
     public void createUser(String name, String email, String password) {
-        // Crear el objeto User
+  
         User user = new User(name, email, password);  
 
-        // Crear el objeto Driver y asociarlo al User
         Driver driver = new Driver(email, name, user);
         driver.setUser(user);
 
-        // Crear el objeto Traveler y asociarlo al User
         Traveler traveler = new Traveler(user); 
 
-        // Comenzar la transacción
         Transaction transaction = session.beginTransaction();
         try {
-            // Guardar el User, Driver y Traveler en la base de datos
             userDAO.save(user);
             driverDAO.save(driver);
             travelerDAO.save(traveler);
 
-            // Confirmar la transacción
             transaction.commit();
-            System.out.println("User, Driver y Traveler creados con éxito.");
+            System.out.println("Erabiltzailea sortu da.");
         } catch (Exception e) {
-            // Si algo sale mal, revertir la transacción
+            
             e.printStackTrace();
             transaction.rollback();
-            throw new RuntimeException("Error al crear el usuario y asociar Driver y Traveler.", e);
+            throw new RuntimeException("Erabiltzailea sortzerakoan errorea egon da", e);
         }
     }
 
@@ -135,7 +129,7 @@ public class HibernateDataAccess {
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
-            throw new RuntimeException("Error al guardar el usuario", e);
+            throw new RuntimeException("Errorea erabiltzailea gordetzerako orduan", e);
         }
     }
 

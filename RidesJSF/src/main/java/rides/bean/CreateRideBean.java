@@ -10,12 +10,14 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
+import domain.Driver;
 
 public class CreateRideBean implements Serializable {
 	private String departCity;
 	private String arrivalCity;
 	private Date rideDate;
 	private int numSeats;
+	private Driver driver;
 	private float price;
 	private BLFacade facadeBL;
 	private static final long serialVersionUID = 1L;
@@ -76,7 +78,7 @@ public class CreateRideBean implements Serializable {
 	public void createRide() {
 
 		try {
-			facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, "driver3@gmail.com");
+			facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, "il@gmail.com");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da", null));
 		} catch (Exception e) {
@@ -93,5 +95,6 @@ public class CreateRideBean implements Serializable {
 	public String close() {
 		return "Main?faces-redirect=true";
 	}
+	
 
 }

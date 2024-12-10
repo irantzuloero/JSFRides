@@ -70,6 +70,9 @@
 								<p:column headerText="Prezioa">
 									<h:outputText value="#{ride.price}" />
 								</p:column>
+								<p:column headerText="Erosi" style=" text-align: center;">
+									<p:commandButton value="Aukeratu" style="font-size: 13px;" action="#{createRideBean.erosi}"  />
+								</p:column>
 							</p:dataTable></td>
 					</tr>
 				</table>
@@ -77,7 +80,7 @@
 				<table style="margin: 15px auto;">
 					<tr>
 						<td><p:commandButton value="Itxi" immediate="true"
-								action="#{createRideBean.close}" ajax="false"
+								action="#{queryRideBean.close}" ajax="false"
 								style="font-size: 13px;" /></td>
 					</tr>
 				</table>

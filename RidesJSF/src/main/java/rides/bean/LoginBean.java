@@ -13,10 +13,9 @@ public class LoginBean {
     private String email;
     private String pasahitza;
 
-    private BLFacade facade; // Inyecta o inicializa esto según sea necesario
+    private BLFacade facade;
 
     public LoginBean() {
-        // Esto es solo un ejemplo; probablemente uses un patrón de inyección de dependencias
         HibernateDataAccess dataAccess = new HibernateDataAccess();
         facade = new BLFacadeImplementation(dataAccess);
     }
@@ -42,7 +41,7 @@ public class LoginBean {
             return "Main?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Invalid email or password"));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Email-a edo pasahitza okerra"));
             return null; 
         }
     }

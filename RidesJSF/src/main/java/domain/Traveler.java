@@ -13,16 +13,13 @@ public class Traveler {
     @OneToOne
     private User user;
 
-    // Constructor vacío
     public Traveler() {}
 
-    // Constructor con parámetros
     public Traveler(User user) {
         this.user = user;
-        this.email = user.getEmail(); // O el email que quieras asignar
+        this.email = user.getEmail(); 
     }
 
-    // Getters y setters
     public String getEmail() {
         return email;
     }
