@@ -17,11 +17,62 @@
 		<div class="form-container">
 			<h:form>
 				<h1>Bidaia erosi</h1>
-				<table>
-					
+				<h:panelGrid columns="2" styleClass="styled-table"
+					style="border-collapse: collapse; width: 60%; margin: auto;">
+					<h:outputLabel value="Irteera hiria:" />
+					<h:outputText value="#{BidaiaErosiBean.selectedRide.fromLocation}" />
+
+					<h:outputLabel value="Helmuga hiria:" />
+					<h:outputText value="#{BidaiaErosiBean.selectedRide.toLocation}" />
+
+					<h:outputLabel value="Gidaria:" />
+					<h:outputText value="#{BidaiaErosiBean.selectedRide.driver.name}" />
+
+					<h:outputLabel value="Eserleku libreak:" />
+					<h:outputText value="#{BidaiaErosiBean.selectedRide.nPlaces}" />
+
+					<h:outputLabel value="Prezioa:" />
+					<h:outputText value="#{BidaiaErosiBean.selectedRide.price}" />
+				</h:panelGrid>
+
+				<div class="seats-selection" style="margin-top: 15px">
+					<h:outputText value="Eserleku kopurua aukeratu:" />
+					<h:selectOneMenu value="#{BidaiaErosiBean.selectedSeats}"
+						style="width: 100%;">
+						<f:selectItems value="#{BidaiaErosiBean.availableSeats}"
+							var="seat" itemLabel="#{seat}" itemValue="#{seat}" />
+						<p:ajax update="totalPrice"
+							listener="#{BidaiaErosiBean.updateTotalPrice}" />
+					</h:selectOneMenu>
+				</div>
+
+				<div class="total-price">
+					<h:outputText value="Guztira:" />
+					<h:outputText id="totalPrice" value="#{BidaiaErosiBean.totalPrice}" />
+				</div>
+
+				<table class="button-table">
+					<tr>
+						<td style="text-align: center;"><p:commandButton
+								value="Bidaia erosi" action="#{BidaiaErosiBean.erosi}"
+								process="@form" update="@form" /></td>
+
+					</tr>
+					<tr>
+						<h:messages id="messages" class="global-message" />
+					</tr>
+				</table>
+
+				<table style="margin: 15px auto;">
+					<tr>
+						<td><p:commandButton value="Itxi" immediate="true"
+								action="#{createRideBean.close}" ajax="false"
+								style="font-size: 13px;" /></td>
+					</tr>
 				</table>
 			</h:form>
 		</div>
+
 	</h:body>
 </f:view>
 

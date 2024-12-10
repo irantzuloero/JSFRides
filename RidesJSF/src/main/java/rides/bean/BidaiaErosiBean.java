@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -19,6 +21,8 @@ import domain.Ride;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
+@ManagedBean(name = "BidaiaErosiBean")
+@SessionScoped
 public class BidaiaErosiBean {
 	private List<String> departCities;
 	private List<String> arrivalCities;
@@ -27,6 +31,10 @@ public class BidaiaErosiBean {
 	private String selectedDepartCity;
 	private String selectedArrivalCity;
 
+	private Ride selectedRide;
+	private int selectedSeats;
+    private float totalPrice;
+	
 	private BLFacade businessLogic;
 
 	public BidaiaErosiBean() {
@@ -97,6 +105,37 @@ public class BidaiaErosiBean {
 		this.data = data;
 	}
 
+	public void setSelectedRide(Ride selectedRide) {
+		this.selectedRide = selectedRide;
+	}
+
+	public Ride getSelectedRide() {
+		return selectedRide;
+	}
+
+	public int getSelectedSeats() {
+        return selectedSeats;
+    }
+
+    public void setSelectedSeats(int selectedSeats) {
+        this.selectedSeats = selectedSeats;
+    }
+
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+    
+
+    public void updateTotalPrice() {
+        if (selectedRide != null && selectedSeats > 0) {
+            this.totalPrice = selectedRide.getPrice() * this.selectedSeats;
+        } else {
+            this.totalPrice = 0;
+        }
+    }
+
+    
 	public void onDateSelect(SelectEvent event) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("" + event.getObject()));
 	}
@@ -113,13 +152,34 @@ public class BidaiaErosiBean {
 		}
 	}
 
-
 	public void sartuArrivalCities() {
 		System.out.println(this.selectedArrivalCity + "listener");
 	}
-	
+
 	public String close() {
 		return "Main?faces-redirect=true";
 	}
+
+	public String erosi() {
+		if (selectedRide == null) {
+	        FacesContext.getCurrentInstance().addMessage(null, 
+	            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+	            "Ez dago bidaiarik hautatuta", ""));
+	        return null; 
+	    }
+		System.out.println(selectedRide.getPrice());
+		return "goToErosi";
+	}
 	
+	public List<Integer> getAvailableSeats() {
+	    List<Integer> seats = new ArrayList<>();
+	    if (selectedRide != null && selectedRide.getnPlaces() > 0) {
+	        for (int i = 1; i <= selectedRide.getnPlaces(); i++) {
+	            seats.add(i);
+	        }
+	    }
+	    return seats;
+	}
+
+
 }

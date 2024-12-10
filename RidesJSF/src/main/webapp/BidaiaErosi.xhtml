@@ -9,7 +9,7 @@
 <f:view>
 	<h:head>
 		<title>Query rides</title>
-		<h:outputStylesheet  name="css/styles.css" />
+		<h:outputStylesheet name="css/styles.css" />
 	</h:head>
 
 	<h:body>
@@ -24,10 +24,10 @@
 								<f:selectItems value="#{QueryRides.departCities}" var="city"
 									itemValue="#{city}" itemLabel="#{city}" />
 								<p:ajax event="change"
-									listener="#{QueryRides.updateArrivalCities}" 
+									listener="#{QueryRides.updateArrivalCities}"
 									update="arrivalCity rideTable" />
 							</p:selectOneMenu></td>
-						<td><h:message for="departCity" class="error-message"  /></td>
+						<td><h:message for="departCity" class="error-message" /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Helmuga hiria:</td>
@@ -36,53 +36,68 @@
 								<f:selectItems value="#{QueryRides.arrivalCities}" var="arrival"
 									itemValue="#{arrival}" itemLabel="#{arrival}" />
 							</p:selectOneMenu></td>
-						<td><h:message for="arrivalCity" class="error-message"  /></td>
+						<td><h:message for="arrivalCity" class="error-message" /></td>
 					</tr>
 					<tr class="input-row">
 						<td class="label-cell">Data:</td>
 						<td class="input-cell"><p:calendar id="data"
 								value="#{QueryRides.data}" navigator="true"
-								dateFormat="dd/MM/yyyy" required="true" showIcon="true" mode="popup">
+								dateFormat="dd/MM/yyyy" required="true" showIcon="true"
+								mode="popup">
 								<p:ajax event="dateSelect" listener="#{QueryRides.onDateSelect}"
 									update="mezuak" />
 							</p:calendar></td>
-							<td><h:message for="data" class="error-message" /> </td>
+						<td><h:message for="data" class="error-message" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="button-cell"><p:commandButton
 								value="Bilatu" action="#{QueryRides.updateRides}"
-								process="@form" update="@form"/></td>
+								process="@form" update="@form" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="bold-text">Eskuragarri dauden bidaiak:</td>
 					</tr>
 					<tr>
-						<td colspan="2"><h:messages id="mezuak" class="global-message" />
-							<p:dataTable id="rideTable" var="ride"
-								value="#{QueryRides.filteredRides}" style="margin-top:20px;"
-								emptyMessage="Ez dago hautatutako irizpideekin bat datozen bidaiarik.">
+						<td colspan="2"><h:messages id="mezuak"
+								class="global-message" /> <p:dataTable id="rideTable"
+								var="ride" value="#{QueryRides.filteredRides}"
+								style="margin-top:20px;"
+								emptyMessage="Ez dago hautatutako irizpideekin bat datozen bidaiarik."
+								selectionMode="single"
+								selection="#{BidaiaErosiBean.selectedRide}" rowKey="#{ride.id}">
+
 								<p:column headerText="Gidaria">
 									<h:outputText value="#{ride.driver.name}" />
 								</p:column>
+
 								<p:column headerText="Eserleku libreak">
 									<h:outputText value="#{ride.nPlaces}" />
 								</p:column>
+
 								<p:column headerText="Prezioa">
 									<h:outputText value="#{ride.price}" />
 								</p:column>
-								<p:column headerText="Erosi" style=" text-align: center;">
-									<p:commandButton value="Aukeratu" style="font-size: 13px;" action="#{createRideBean.erosi}"  />
-								</p:column>
+
+
 							</p:dataTable></td>
 					</tr>
 				</table>
-
+				<table class="button-table">
+					<tr>
+						<td style="text-align: center;"><p:commandButton value="Erosi" action="#{BidaiaErosiBean.erosi}" process="@form" update="@form" /></td>
+						
+					</tr>
+				
+				</table>
+				
 				<table style="margin: 15px auto;">
 					<tr>
+					<h:outputText value="#{BidaiaErosiBean.selectedRide}"></h:outputText>
 						<td><p:commandButton value="Itxi" immediate="true"
 								action="#{queryRideBean.close}" ajax="false"
 								style="font-size: 13px;" /></td>
 					</tr>
+					
 				</table>
 			</h:form>
 		</div>

@@ -123,8 +123,5 @@ public class QueryRidesBean {
 		return "Hasiera?faces-redirect=true";
 	}
 	
-	public String erosi() {
-		return "Erosketa?faces-redirect=true";
-	}
 	
 }
