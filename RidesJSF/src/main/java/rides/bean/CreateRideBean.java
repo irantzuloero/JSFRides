@@ -5,12 +5,14 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
 import domain.Driver;
+import domain.User;
 
 public class CreateRideBean implements Serializable {
 	private String departCity;
@@ -78,13 +80,27 @@ public class CreateRideBean implements Serializable {
 	public void createRide() {
 
 		try {
-			facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, "il@gmail.com");
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da", null));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
-		}
+	        // Obtener el usuario actual de la sesión
+	        FacesContext facesContext = FacesContext.getCurrentInstance();
+	        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+	        User currentUser = (User) session.getAttribute("currentUser");
+
+	        if (currentUser != null) {
+	            String userEmail = currentUser.getEmail(); // Email del usuario en sesión
+
+	            // Llamar a la lógica de negocio para crear el viaje
+	            facadeBL.createRide(departCity, arrivalCity, rideDate, numSeats, price, userEmail);
+
+	            FacesContext.getCurrentInstance().addMessage(null,
+	                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da", null));
+	        } else {
+	            FacesContext.getCurrentInstance().addMessage(null,
+	                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erabiltzailea ez da saioa hasi.", null));
+	        }
+	    } catch (Exception e) {
+	        FacesContext.getCurrentInstance().addMessage(null,
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
+	    }
 
 	}
 

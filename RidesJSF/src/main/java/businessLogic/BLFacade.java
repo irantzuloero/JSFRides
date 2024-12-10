@@ -5,6 +5,7 @@ import java.util.List;
 
 //import domain.Booking;
 import domain.Ride;
+import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
@@ -61,4 +62,5 @@ public interface BLFacade  {
 
 	 public void registerUser(String name, String email, String password) throws UserAlreadyExistsException;
 	 public boolean isValidUser(String email, String pasahitza);
+	 public User getUserByEmail(String email);
 }

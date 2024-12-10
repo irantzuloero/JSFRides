@@ -136,4 +136,8 @@ public class HibernateDataAccess {
     public boolean isValidUser(String email, String pasahitza) {
         return userDAO.getUserByEmailAndPassword(email, pasahitza) != null;
     }
+    public User getUserByEmail(String email) {
+        return userDAO.getUserByEmail(email);
+    }
+
 }

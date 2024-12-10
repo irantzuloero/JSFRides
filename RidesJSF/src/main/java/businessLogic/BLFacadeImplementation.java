@@ -1,6 +1,7 @@
 package businessLogic;
 
 import domain.Ride;
+import domain.User;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
@@ -46,6 +47,9 @@ public class BLFacadeImplementation implements BLFacade {
     }
     public boolean isValidUser(String email, String pasahitza) {
         return dataAccess.isValidUser(email, pasahitza);
+    }
+    public User getUserByEmail(String email) {
+        return dataAccess.getUserByEmail(email);
     }
 
 }
