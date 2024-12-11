@@ -140,4 +140,17 @@ public class HibernateDataAccess {
         return userDAO.getUserByEmail(email);
     }
 
+	public void updateEserlekuKop(Ride ride, int eserlekuak) {
+		Transaction transaction = session.beginTransaction();
+		int eserleku= ride.getnPlaces();
+		ride.setnPlaces(eserleku-eserlekuak);
+		try {
+		rideDAO.save(ride);
+		transaction.commit();
+		} catch(Exception e){
+			transaction.rollback();
+            throw new RuntimeException("Errorea erabiltzailea gordetzerako orduan", e);
+		}
+	}
+
 }

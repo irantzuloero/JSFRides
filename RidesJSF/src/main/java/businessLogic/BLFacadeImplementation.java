@@ -51,5 +51,9 @@ public class BLFacadeImplementation implements BLFacade {
     public User getUserByEmail(String email) {
         return dataAccess.getUserByEmail(email);
     }
+    
+    public void updateEserlekuKop(Ride ride, int eserlekuak) {
+    	 dataAccess.updateEserlekuKop(ride, eserlekuak);
+    }
 
 }

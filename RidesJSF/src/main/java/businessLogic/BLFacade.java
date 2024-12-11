@@ -63,4 +63,6 @@ public interface BLFacade  {
 	 public void registerUser(String name, String email, String password) throws UserAlreadyExistsException;
 	 public boolean isValidUser(String email, String pasahitza);
 	 public User getUserByEmail(String email);
+
+	public void updateEserlekuKop(Ride ride, int eserlekuak);
 }

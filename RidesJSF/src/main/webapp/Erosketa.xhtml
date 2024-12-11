@@ -17,8 +17,10 @@
 		<div class="form-container">
 			<h:form>
 				<h1>Bidaia erosi</h1>
+				<h:outputText value="Aukeratutako bidaia: " style="font-weight: bold; font-size:20px; text-align:left; margin-top: 40px"/>
 				<h:panelGrid columns="2" styleClass="styled-table"
-					style="border-collapse: collapse; width: 60%; margin: auto;">
+					style="border-collapse: collapse; width: 40%; margin-left: 80px">
+					
 					<h:outputLabel value="Irteera hiria:" />
 					<h:outputText value="#{BidaiaErosiBean.selectedRide.fromLocation}" />
 
@@ -35,10 +37,10 @@
 					<h:outputText value="#{BidaiaErosiBean.selectedRide.price}" />
 				</h:panelGrid>
 
-				<div class="seats-selection" style="margin-top: 15px">
-					<h:outputText value="Eserleku kopurua aukeratu:" />
+				<div  style="margin-top: 20px; text-align:left; margin-left: 260px;  font-size: 23px">
+					<h:outputText value="Eserleku kopurua aukeratu: " />
 					<h:selectOneMenu value="#{BidaiaErosiBean.selectedSeats}"
-						style="width: 100%;">
+						style="width: 10%;">
 						<f:selectItems value="#{BidaiaErosiBean.availableSeats}"
 							var="seat" itemLabel="#{seat}" itemValue="#{seat}" />
 						<p:ajax update="totalPrice"
@@ -46,15 +48,15 @@
 					</h:selectOneMenu>
 				</div>
 
-				<div class="total-price">
-					<h:outputText value="Guztira:" />
+				<div  style=" text-align:left; margin-left: 260px; font-size: 23px">
+					<h:outputText value="Guztira: " />
 					<h:outputText id="totalPrice" value="#{BidaiaErosiBean.totalPrice}" />
 				</div>
 
 				<table class="button-table">
 					<tr>
 						<td style="text-align: center;"><p:commandButton
-								value="Bidaia erosi" action="#{BidaiaErosiBean.erosi}"
+								value="Bidaia erosi" action="#{BidaiaErosiBean.ordaindu}"
 								process="@form" update="@form" /></td>
 
 					</tr>
@@ -65,8 +67,8 @@
 
 				<table style="margin: 15px auto;">
 					<tr>
-						<td><p:commandButton value="Itxi" immediate="true"
-								action="#{createRideBean.close}" ajax="false"
+						<td><p:commandButton value="Atzera" immediate="true"
+								action="#{erosketaBean.atzera}" ajax="false"
 								style="font-size: 13px;" /></td>
 					</tr>
 				</table>

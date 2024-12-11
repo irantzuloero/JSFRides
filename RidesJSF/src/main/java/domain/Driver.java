@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Driver {
 
     @Id
-    private String email; // Usamos el email como identificador
+    private String email; 
     private String name;
 
     @OneToMany(mappedBy = "driver", cascade = CascadeType.PERSIST)
@@ -24,7 +24,7 @@ public class Driver {
     public Driver(String email, String name, User user) {
         this.email = email;
         this.name = name;
-        this.user = user;  // Asociamos el user al driver
+        this.user = user;  
     }
 
     public String getEmail() {

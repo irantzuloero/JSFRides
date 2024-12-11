@@ -34,7 +34,6 @@ public class BidaiaErosiBean {
 	private Ride selectedRide;
 	private int selectedSeats;
     private float totalPrice;
-	
 	private BLFacade businessLogic;
 
 	public BidaiaErosiBean() {
@@ -130,7 +129,7 @@ public class BidaiaErosiBean {
     public void updateTotalPrice() {
         if (selectedRide != null && selectedSeats > 0) {
             this.totalPrice = selectedRide.getPrice() * this.selectedSeats;
-        } else {
+        }  else {
             this.totalPrice = 0;
         }
     }
@@ -167,8 +166,14 @@ public class BidaiaErosiBean {
 	            "Ez dago bidaiarik hautatuta", ""));
 	        return null; 
 	    }
+		if (selectedRide.getnPlaces()==0) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+		            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+		            "Ez daude eserleku libreak", ""));
+		        return null; 
+		}
 		System.out.println(selectedRide.getPrice());
-		return "goToErosi";
+		return "Erosketa?faces-redirect=true";
 	}
 	
 	public List<Integer> getAvailableSeats() {
@@ -180,6 +185,12 @@ public class BidaiaErosiBean {
 	    }
 	    return seats;
 	}
-
+	
+	public void ordaindu() {
+		FacesContext.getCurrentInstance().addMessage(null, 
+	            new FacesMessage(FacesMessage.SEVERITY_INFO, 
+	            "Bidaia erosi duzu!", ""));
+		businessLogic.updateEserlekuKop(selectedRide, selectedSeats);
+	}
 
 }
