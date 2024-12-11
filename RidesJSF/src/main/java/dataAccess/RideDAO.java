@@ -3,6 +3,8 @@ package dataAccess;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import domain.Ride;
+import domain.User;
+import eredua.HibernateUtil;
 import domain.Driver;
 
 import java.util.List;
@@ -50,6 +52,21 @@ public class RideDAO {
         query.setParameter("toLocation", to);      
         query.setParameter("date", date);
         return query.list();  
+    }
+
+    public List<Ride> getRidesByUser(Driver driver) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "FROM Ride r WHERE r.driver = :driver";
+            Query query = session.createQuery(hql);
+            query.setParameter("driver", driver); 
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
 }

@@ -11,18 +11,23 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Booking;
 import domain.Ride;
+import domain.User;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
 @ManagedBean(name = "BidaiaErosiBean")
 @SessionScoped
+@ViewScoped
 public class BidaiaErosiBean {
 	private List<String> departCities;
 	private List<String> arrivalCities;
@@ -32,7 +37,7 @@ public class BidaiaErosiBean {
 	private String selectedArrivalCity;
 
 	private Ride selectedRide;
-	private int selectedSeats;
+	private int selectedSeats = 0;
     private float totalPrice;
 	private BLFacade businessLogic;
 
@@ -160,6 +165,10 @@ public class BidaiaErosiBean {
 	}
 
 	public String erosi() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        User currentUser = (User) session.getAttribute("currentUser");
+        
 		if (selectedRide == null) {
 	        FacesContext.getCurrentInstance().addMessage(null, 
 	            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
@@ -172,6 +181,12 @@ public class BidaiaErosiBean {
 		            "Ez daude eserleku libreak", ""));
 		        return null; 
 		}
+		if (selectedRide.getDriver().getEmail().equals(currentUser.getEmail())) {
+	        FacesContext.getCurrentInstance().addMessage(null, 
+	            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ezin duzu zuk sortutako bidaia erosi", ""));
+	        return null; 
+	    }
+		
 		System.out.println(selectedRide.getPrice());
 		return "Erosketa?faces-redirect=true";
 	}
@@ -187,10 +202,20 @@ public class BidaiaErosiBean {
 	}
 	
 	public void ordaindu() {
+		if(totalPrice!=0.0) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+	        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+	        User currentUser = (User) session.getAttribute("currentUser");
+	        
 		FacesContext.getCurrentInstance().addMessage(null, 
 	            new FacesMessage(FacesMessage.SEVERITY_INFO, 
 	            "Bidaia erosi duzu!", ""));
-		businessLogic.updateEserlekuKop(selectedRide, selectedSeats);
+		businessLogic.createBooking( currentUser, selectedRide, selectedSeats, totalPrice, new Date());
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, 
+		            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+		            "Mesedez, eserleku kopurua aukeratu", ""));
+		}	
 	}
 
 }

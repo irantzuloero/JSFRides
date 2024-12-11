@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17327914104700" configfile="/RidesJSF/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="Main.xhtml" x="770" y="401" id="pf17334981418700" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf17334981418711 pf17335645074500 pf17335651742822" inlinks="pf17334981418713" path="/Main.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Main.xhtml" x="770" y="401" id="pf17334981418700" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf17334981418711 pf17335645074500 pf17335651742822 pf17339426104740" inlinks="pf17334981418713" path="/Main.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="CreateRide.xhtml" x="986" y="209" id="pf17334981418714" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf17334981418711" path="/CreateRide.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="QueryRides.xhtml" x="384" y="552" id="pf17334981418715" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf17335645074501" path="/QueryRides.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Hasiera.xhtml" x="122" y="380" id="pf17334981418716" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf17334981418717 pf17334981418718 pf17335645074501" inlinks="pf17335645074500" path="/Hasiera.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Erregistratu.xhtml" x="338" y="178" id="pf17334981418719" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf173349814187110" inlinks="pf17334981418718" path="/Erregistratu.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Login.xhtml" x="554" y="199" id="pf173349814187111" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf17334981418713" inlinks="pf17334981418717 pf173349814187110" path="/Login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="BidaiaErosi.xhtml" x="1025" y="512" id="pf17335651742823" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" outlinks="pf17337417042350" inlinks="pf17335651742822" path="/BidaiaErosi.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Erosketa.xhtml" x="828" y="577" id="pf17337417042351" inlinks="pf17337417042350" path="/Erosketa.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="BidaiaErosi.xhtml" x="1025" y="512" id="pf17335651742823" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf17337417042350" inlinks="pf17335651742822" path="/BidaiaErosi.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Erosketa.xhtml" x="828" y="577" id="pf17337417042351" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf17337417042350" path="/Erosketa.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="BidaiakEskuratu.xhtml" x="1055" y="371" id="pf17339426104751" inlinks="pf17339426104740" path="/BidaiakEskuratu.xhtml"/>
   <links id="pf17334981418711" target="pf17334981418714" source="pf17334981418700" outcome="goToCreateRide"/>
   <links id="pf17334981418717" target="pf173349814187111" source="pf17334981418716" outcome="goToLogin"/>
   <links id="pf17334981418718" target="pf17334981418719" source="pf17334981418716" outcome="goToRegister"/>
@@ -17,4 +18,5 @@
   <links id="pf17335645074501" target="pf17334981418715" source="pf17334981418716" outcome="goToQueryRides"/>
   <links id="pf17335651742822" target="pf17335651742823" source="pf17334981418700" outcome="goToBidaiaErosi"/>
   <links id="pf17337417042350" target="pf17337417042351" source="pf17335651742823" outcome="goToErosi"/>
+  <links id="pf17339426104740" target="pf17339426104751" source="pf17334981418700" outcome="goToMyRides"/>
 </pageflow:Pageflow>

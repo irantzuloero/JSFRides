@@ -13,4 +13,8 @@ public class MainBean {
         return "CreateRide?faces-redirect=true";
     }
     
+    public String goToMyRides() {
+    	return "BidaiakEskuratu?faces-redirect=true";
+    }
+    
 }

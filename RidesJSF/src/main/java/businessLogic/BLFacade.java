@@ -5,7 +5,9 @@ import java.util.List;
 
 //import domain.Booking;
 import domain.Ride;
+import domain.Traveler;
 import domain.User;
+import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
@@ -65,4 +67,10 @@ public interface BLFacade  {
 	 public User getUserByEmail(String email);
 
 	public void updateEserlekuKop(Ride ride, int eserlekuak);
+	
+	public void createBooking(User user, Ride ride, int seats, float price, Date date);
+
+	public List<Booking> getBookingsByUser(User currentUser);
+
+	public List<Ride> getRidesByUser(User currentUser);
 }

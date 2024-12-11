@@ -3,6 +3,7 @@ package dataAccess;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import domain.Booking;
 import domain.Driver;
 import domain.Ride;
 import domain.Traveler;
@@ -13,6 +14,10 @@ import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
 
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import java.util.Date;
 
 public class HibernateDataAccess {
@@ -21,6 +26,7 @@ public class HibernateDataAccess {
     private RideDAO rideDAO;
     private UserDAO userDAO;
     private TravelerDAO travelerDAO;
+    private  BookingDAO bookingDAO;
 
     public HibernateDataAccess() {
         openSession();
@@ -28,6 +34,7 @@ public class HibernateDataAccess {
         rideDAO = new RideDAO(session);
         userDAO = new UserDAO(session);
         travelerDAO = new TravelerDAO(session);
+        bookingDAO = new BookingDAO(session);
     }
 
     private void openSession() {
@@ -72,7 +79,6 @@ public class HibernateDataAccess {
 
         Driver driver = driverDAO.getDriver(driverEmail);
         if (driver == null) {
-        	System.out.println("sartu da");
             throw new RuntimeException("Gidaria ez da aurkitu.");
         }
 
@@ -140,17 +146,69 @@ public class HibernateDataAccess {
         return userDAO.getUserByEmail(email);
     }
 
-	public void updateEserlekuKop(Ride ride, int eserlekuak) {
-		Transaction transaction = session.beginTransaction();
-		int eserleku= ride.getnPlaces();
-		ride.setnPlaces(eserleku-eserlekuak);
-		try {
-		rideDAO.save(ride);
-		transaction.commit();
-		} catch(Exception e){
-			transaction.rollback();
-            throw new RuntimeException("Errorea erabiltzailea gordetzerako orduan", e);
-		}
-	}
+    public void updateEserlekuKop(Ride ride, int seats) {
+        if (session == null || !session.isOpen()) {
+            openSession();  // Asegúrate de que la sesión está abierta
+        }
+
+        Transaction transaction = session.beginTransaction();  // Iniciar una transacción
+
+        try {
+            // Actualizar el número de asientos
+            int remainingSeats = ride.getnPlaces();
+            ride.setnPlaces(remainingSeats - seats);
+            
+            rideDAO.save(ride);  // Guardar el cambio en los asientos
+            transaction.commit();  // Confirmar la transacción
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();  // Hacer rollback en caso de error
+            }
+            throw new RuntimeException("Error al actualizar los asientos", e);
+        }
+    }
+
+	
+    public void createBooking(User user, Ride ride, int seats, float price, Date date) {
+ 
+    	Traveler traveler = bookingDAO.findTravelerByUser(user);
+        Booking booking = new Booking(traveler, ride, seats, price, date);
+        traveler.addBooking(booking);
+        
+        int remainingSeats = ride.getnPlaces();
+        ride.setnPlaces(remainingSeats - seats);
+        
+        Transaction transaction = session.beginTransaction();  // Abre la transacción
+        try {
+            bookingDAO.saveBooking(booking);  // Guardar la reserva
+            
+            rideDAO.save(ride); 
+            transaction.commit(); 
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback(); 
+            }
+            throw new RuntimeException("Error al procesar la reserva y actualizar los asientos", e);
+        }
+    }
+    
+    public List<Booking> getBookingsByUser(User user) {
+        Traveler traveler = travelerDAO.getTravelerByUser(user);
+        if (traveler != null) {
+            return bookingDAO.getBookingsByUser(traveler);
+        }
+        return null;
+    }
+
+    public List<Ride> getRidesByUser(User user) {
+    
+        Driver driver = driverDAO.getDriverByUser(user);
+        if (driver != null) {
+            return rideDAO.getRidesByUser(driver);
+        }
+        return null;
+    }
+
+
 
 }

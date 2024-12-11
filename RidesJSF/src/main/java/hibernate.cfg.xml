@@ -16,5 +16,6 @@
   <mapping class="domain.Driver"/>
   <mapping class="domain.User"/>
   <mapping class="domain.Traveler"/>
+   <mapping class="domain.Booking"/>
  </session-factory>
 </hibernate-configuration>

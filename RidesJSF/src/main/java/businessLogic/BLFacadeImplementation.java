@@ -1,7 +1,9 @@
 package businessLogic;
 
 import domain.Ride;
+import domain.Traveler;
 import domain.User;
+import domain.Booking;
 import domain.Driver;
 import exceptions.RideMustBeLaterThanTodayException;
 import exceptions.UserAlreadyExistsException;
@@ -55,5 +57,18 @@ public class BLFacadeImplementation implements BLFacade {
     public void updateEserlekuKop(Ride ride, int eserlekuak) {
     	 dataAccess.updateEserlekuKop(ride, eserlekuak);
     }
+    
+    public void createBooking(User user, Ride ride, int seats, float price, Date date) {
+    	dataAccess.createBooking(user, ride, seats, price, date);
+    }
+    
+    public List<Booking> getBookingsByUser(User user) {
+        return dataAccess.getBookingsByUser(user);  // Método para obtener las reservas del usuario
+    }
+
+    public List<Ride> getRidesByUser(User user) {
+        return dataAccess.getRidesByUser(user);  // Método para obtener los viajes creados por el usuario
+    }
+
 
 }
