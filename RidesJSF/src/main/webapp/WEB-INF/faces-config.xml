@@ -50,6 +50,11 @@
 		<managed-bean-class>rides.bean.BidaiakEskuratuBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bidaiGuztiakBean</managed-bean-name>
+		<managed-bean-class>rides.bean.BidaiGuztiakBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 
@@ -138,6 +143,22 @@
 		<navigation-case>
 			<from-outcome>goToMyRides</from-outcome>
 			<to-view-id>/BidaiakEskuratu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Main.xhtml</display-name>
+		<from-view-id>/Main.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToBidaiGuztiak</from-outcome>
+			<to-view-id>/BidaiGuztiak.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>BidaiGuztiak.xhtml</display-name>
+		<from-view-id>/BidaiGuztiak.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToBidaiGuztiak2</from-outcome>
+			<to-view-id>/BidaiGuztiak2.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

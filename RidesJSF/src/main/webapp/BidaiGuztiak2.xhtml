@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title>Query rides</title>
+		<h:outputStylesheet  name="css/styles.css" />
+	</h:head>
+
+	<h:body>
+		<div class="form-container">
+			<h:form>
+				<h1>Bidaia bilatu</h1>
+			
+				<table>
+					<tr>
+						<td colspan="2" class="bold-text">Eskuragarri dauden bidaiak data horretan:</td>
+					</tr>
+					<tr>
+						<td colspan="2"><h:messages id="mezuak" class="global-message" />
+							<p:dataTable id="rideTable" var="ride"
+								value="#{QueryRides.filteredRides}" style="margin-top:20px;"
+								emptyMessage="Ez dago hautatutako irizpideekin bat datozen bidaiarik.">
+								<p:column headerText="Depart city">
+									<h:outputText value="#{ride.fromLocation}" />
+								</p:column>
+								<p:column headerText="Arrival city">
+									<h:outputText value="#{ride.toLocation}" />
+								</p:column>
+								<p:column headerText="Driver name">
+									<h:outputText value="#{ride.driver.name}" />
+								</p:column>
+								<p:column headerText="Price">
+									<h:outputText value="#{ride.price}" />
+								</p:column>
+							</p:dataTable></td>
+					</tr>
+					
+				</table>
+
+			</h:form>
+		</div>
+	</h:body>
+</f:view>
+
+</html>

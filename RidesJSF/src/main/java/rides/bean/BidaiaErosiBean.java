@@ -216,6 +216,7 @@ public class BidaiaErosiBean {
 		            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 		            "Mesedez, eserleku kopurua aukeratu", ""));
 		}	
+		
 	}
 
 }

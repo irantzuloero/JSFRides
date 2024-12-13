@@ -1,5 +1,6 @@
 package rides.bean;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,8 +8,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -19,6 +22,8 @@ import domain.Ride;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
+@ManagedBean
+@SessionScoped
 public class QueryRidesBean {
 	private List<String> departCities;
 	private List<String> arrivalCities;
@@ -113,7 +118,20 @@ public class QueryRidesBean {
 			filteredRides = null;
 		}
 	}
-
+	
+	public void bidaiGuztiak() {
+		if (data != null) {
+			filteredRides = businessLogic.getAllRides(data);
+			if (filteredRides == null || filteredRides.isEmpty()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"Ez daude bidaiarik data horretan", ""));
+			}
+			System.out.println(filteredRides);
+		} else {
+			filteredRides = null;
+		}
+		
+	}
 
 	public void sartuArrivalCities() {
 		System.out.println(this.selectedArrivalCity + "listener");
@@ -122,6 +140,7 @@ public class QueryRidesBean {
 	public String close() {
 		return "Hasiera?faces-redirect=true";
 	}
+	
 	
 	
 }

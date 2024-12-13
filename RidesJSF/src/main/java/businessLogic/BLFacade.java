@@ -73,4 +73,6 @@ public interface BLFacade  {
 	public List<Booking> getBookingsByUser(User currentUser);
 
 	public List<Ride> getRidesByUser(User currentUser);
+
+	public List<Ride> getAllRides(Date data);
 }

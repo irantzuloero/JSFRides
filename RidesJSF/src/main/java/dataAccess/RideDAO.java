@@ -69,4 +69,10 @@ public class RideDAO {
         }
     }
 
+	public List<Ride> getAllRides(Date date) {
+		Query query = session.createQuery("FROM Ride r WHERE r.date = :date");    
+        query.setParameter("date", date);
+        return query.list();  
+	}
+
 }

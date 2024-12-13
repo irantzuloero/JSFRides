@@ -209,6 +209,8 @@ public class HibernateDataAccess {
         return null;
     }
 
-
+    public List<Ride> getAllRides(Date date) {
+        return rideDAO.getAllRides(date);
+    }
 
 }

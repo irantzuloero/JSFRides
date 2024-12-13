@@ -69,6 +69,9 @@ public class BLFacadeImplementation implements BLFacade {
     public List<Ride> getRidesByUser(User user) {
         return dataAccess.getRidesByUser(user);  // Método para obtener los viajes creados por el usuario
     }
-
+    
+    public List<Ride> getAllRides(Date data){
+    	return dataAccess.getAllRides(data);
+    }
 
 }

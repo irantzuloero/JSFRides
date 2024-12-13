@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+	<h:head>
+		<title>Query rides</title>
+		<h:outputStylesheet  name="css/styles.css" />
+	</h:head>
+
+	<h:body>
+		<div class="form-container">
+			<h:form>
+				<h1>Bidaia bilatu</h1>
+				<table>
+					<tr class="input-row">
+						<td class="label-cell">Data:</td>
+						<td class="input-cell"><p:calendar id="data"
+								value="#{QueryRides.data}" navigator="true"
+								dateFormat="dd/MM/yyyy" required="true" showIcon="true" mode="popup">
+								<p:ajax event="dateSelect" listener="#{QueryRides.onDateSelect}"
+									 />
+							</p:calendar></td>
+							<td><h:message for="data" class="error-message" /> </td>
+					</tr>
+					<tr>
+						<td colspan="2" class="button-cell"><p:commandButton
+								value="Bidai guztiak erakutsi" action="#{bidaiGuztiakBean.goToBidaiGuztiak2}"
+								process="@form" update="@form"/></td>
+					</tr>
+					
+				</table>
+
+				
+			</h:form>
+		</div>
+	</h:body>
+</f:view>
+
+</html>

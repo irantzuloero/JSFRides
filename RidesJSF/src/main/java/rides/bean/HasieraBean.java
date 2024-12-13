@@ -20,4 +20,8 @@ public class HasieraBean {
     public String saioaItxi() {
     	return "Hasiera?faces-redirect=true";
     }
+    
+    public String goToBidaiGuztiak() {
+    	return "BidaiGuztiak?faces-redirect=true";
+    }
 }
