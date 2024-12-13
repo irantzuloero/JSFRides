@@ -71,7 +71,7 @@ public class BidaiaErosiBean {
 	public void updateArrivalCities() {
 		if (selectedDepartCity != null && !selectedDepartCity.isEmpty()) {
 			arrivalCities = businessLogic.getDestinationCities(selectedDepartCity);
-		} else {
+		} else { 
 			arrivalCities = null;
 		}
 	}
