@@ -1,6 +1,7 @@
 package rides.bean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "Hasiera")
 public class HasieraBean {
@@ -18,6 +19,7 @@ public class HasieraBean {
     }
     
     public String saioaItxi() {
+    	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     	return "Hasiera?faces-redirect=true";
     }
     

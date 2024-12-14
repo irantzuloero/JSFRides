@@ -153,7 +153,7 @@ public class HibernateDataAccess {
 
         Transaction transaction = session.beginTransaction();  // Iniciar una transacción
 
-        try {
+        try { 
             // Actualizar el número de asientos
             int remainingSeats = ride.getnPlaces();
             ride.setnPlaces(remainingSeats - seats);
